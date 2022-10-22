@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AgendaMedicaBackApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AgendaMedicaBackApplication.class, args);
-	}
 
+		SpringApplication.run(AgendaMedicaBackApplication.class, args);
+		System.out.println("Api da Web App Agenda Medica rodando!");
+	}
 }
