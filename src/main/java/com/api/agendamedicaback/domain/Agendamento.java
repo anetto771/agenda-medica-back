@@ -1,20 +1,40 @@
 package com.api.agendamedicaback.domain;
 
 import com.api.agendamedicaback.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Agendamento {
+@Entity
+public class Agendamento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataAbertura = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFechamento;
     private Status status;
     private String titulo;
     private String Observacoes;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name="medico_id")
     private Medico medico;
+    @ManyToOne
+    @JoinColumn(name="paciente_id")
     private Paciente paciente;
+
 
     public Agendamento() {
         super();
