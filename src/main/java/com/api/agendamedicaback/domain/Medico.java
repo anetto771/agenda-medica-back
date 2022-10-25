@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Medico extends Pessoa{
+public class Medico extends Pessoa {
 
     private static final long serialVersionUID = 1L;
     @OneToMany(mappedBy = "medico")

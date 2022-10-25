@@ -19,12 +19,12 @@ public enum Status {
         return descricao;
     }
 
-    public static Status toEnum(Integer cod){
-        if(cod == null) {
+    public static Status toEnum(Integer cod) {
+        if (cod == null) {
             return null;
         }
-        for(Status x: Status.values()){
-            if(cod.equals(x.getCodigo())){
+        for (Status x : Status.values()) {
+            if (cod.equals(x.getCodigo())) {
                 return x;
             }
         }
