@@ -29,10 +29,10 @@ public class Agendamento implements Serializable {
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name="medico_id")
+    @JoinColumn(name = "medico_id")
     private Medico medico;
     @ManyToOne
-    @JoinColumn(name="paciente_id")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
 
@@ -119,7 +119,7 @@ public class Agendamento implements Serializable {
             return true;
         if (obj == null)
             return false;
-        if(getClass() != obj.getClass())
+        if (getClass() != obj.getClass())
             return false;
         Agendamento other = (Agendamento) obj;
         if (id == null) {
@@ -134,7 +134,7 @@ public class Agendamento implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null)? 0 : id.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 }

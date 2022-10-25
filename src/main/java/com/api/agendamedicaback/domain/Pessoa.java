@@ -26,7 +26,7 @@ public abstract class Pessoa implements Serializable {
     protected String email;
     protected String senha;
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name="PERFIS")
+    @CollectionTable(name = "PERFIS")
     protected Set<Integer> perfis = new HashSet<>();
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
@@ -86,7 +86,7 @@ public abstract class Pessoa implements Serializable {
     }
 
     public Set<Perfil> getPerfils() {
-        return perfis.stream().map(x-> Perfil.toEnum((x))).collect(Collectors.toSet());
+        return perfis.stream().map(x -> Perfil.toEnum((x))).collect(Collectors.toSet());
     }
 
     public void addPerfis(Perfil perfis) {
@@ -111,25 +111,25 @@ public abstract class Pessoa implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Pessoa other = (Pessoa) obj;
-        if(cpf == null){
+        if (cpf == null) {
             if (other.cpf != null)
                 return false;
-        }else if (!cpf.equals(other.cpf))
+        } else if (!cpf.equals(other.cpf))
             return false;
-        if (id == null){
-            if (other.id!= null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        }else if(!id.equals(other.id))
+        } else if (!id.equals(other.id))
             return false;
         return true;
-     }
+    }
 
     @Override
     public int hashCode() {
-        final int prime =31;
-        int result =1;
-        result = prime * result + ((cpf == null)? 0 : cpf.hashCode());
-        result = prime * result + ((id == null)? 0: id.hashCode());
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 }
