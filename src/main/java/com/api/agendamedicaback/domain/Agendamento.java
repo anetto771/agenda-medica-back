@@ -41,6 +41,7 @@ public class Agendamento implements Serializable {
     }
 
     public Agendamento(Integer id, Status status, String titulo, String observacoes, Medico medico, Paciente paciente) {
+        super();
         this.id = id;
         this.status = status;
         this.titulo = titulo;

@@ -1,5 +1,7 @@
 package com.api.agendamedicaback.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -9,6 +11,8 @@ import java.util.List;
 public class Medico extends Pessoa {
 
     private static final long serialVersionUID = 1L;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "medico")
     private List<Agendamento> agendamentos = new ArrayList<>();
 
