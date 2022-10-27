@@ -39,6 +39,5 @@ public class UsuarioResource {
         Usuario newObj = usuarioService.create(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
-
     }
 }

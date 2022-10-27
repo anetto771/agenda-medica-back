@@ -1,9 +1,12 @@
 package com.api.agendamedicaback.services;
 
 
+import com.api.agendamedicaback.domain.Pessoa;
 import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.dtos.UsuarioDTO;
+import com.api.agendamedicaback.repositories.PessoaRepository;
 import com.api.agendamedicaback.repositories.UsuarioRepository;
+import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
 import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +20,12 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario findById(Integer id){
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    public Usuario findById(Integer id) {
         Optional<Usuario> obj = repository.findById(id);
-        return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado!: "+id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!: " + id));
     }
 
     public List<Usuario> findAll() {
@@ -28,8 +34,20 @@ public class UsuarioService {
 
     public Usuario create(UsuarioDTO objDto) {
         objDto.setId(null);
+        ValidaPorCpfEEmail(objDto);
         Usuario newObj = new Usuario(objDto);
         return repository.save(newObj);
+    }
+
+    private void ValidaPorCpfEEmail(UsuarioDTO objDto) {
+        Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
+        if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
+            throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
+        }
+        obj = pessoaRepository.findByEmail(objDto.getEmail());
+        if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
+            throw new DataIntegrityViolationException("E-mail já existente no sistema!");
+        }
     }
 }
 
