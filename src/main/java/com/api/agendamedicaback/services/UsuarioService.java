@@ -57,5 +57,16 @@ public class UsuarioService {
         oldObj = new Usuario(objDto);
         return repository.save(oldObj);
     }
+
+    public void delete(Integer id) {
+        Usuario obj = findById(id);
+        if (obj.getAgendamento().size() > 0){
+            throw new DataIntegrityViolationException("" +
+                    "O usuário possui agendamentos e não pode ser excluido."
+            );
+        }
+        repository.deleteById(id);
+    }
 }
+
 
