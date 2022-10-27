@@ -1,6 +1,5 @@
 package com.api.agendamedicaback.domain.dtos;
 
-import com.api.agendamedicaback.domain.Medico;
 import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,11 +32,11 @@ public class UsuarioDTO implements Serializable {
     public UsuarioDTO(Usuario obj) {
         super();
         this.id = id = obj.getId();
-        this.nome =  obj.getNome();
-        this.cpf =  obj.getCpf();
+        this.nome = obj.getNome();
+        this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.senha = obj.getSenha();
-        this.perfis = obj.getPerfils().stream().map(x-> x.getCodigo()).collect(Collectors.toSet());
+        this.perfis = obj.getPerfils().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
         addPerfis(Perfil.PACIENTE);
     }
@@ -63,6 +61,7 @@ public class UsuarioDTO implements Serializable {
 
         this.nome = nome;
     }
+
 
     public String getCpf() {
 
@@ -95,7 +94,7 @@ public class UsuarioDTO implements Serializable {
 
     public Set<Perfil> getPerfis() {
 
-        return perfis.stream().map(x-> Perfil.toEnum(x)).collect(Collectors.toSet());
+        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
     public void addPerfis(Perfil perfis) {
