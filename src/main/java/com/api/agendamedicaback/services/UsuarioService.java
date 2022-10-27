@@ -34,12 +34,12 @@ public class UsuarioService {
 
     public Usuario create(UsuarioDTO objDto) {
         objDto.setId(null);
-        ValidaPorCpfEEmail(objDto);
+        validaPorCpfEEmail(objDto);
         Usuario newObj = new Usuario(objDto);
         return repository.save(newObj);
     }
 
-    private void ValidaPorCpfEEmail(UsuarioDTO objDto) {
+    private void validaPorCpfEEmail(UsuarioDTO objDto) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
             throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
@@ -48,6 +48,14 @@ public class UsuarioService {
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
             throw new DataIntegrityViolationException("E-mail já existente no sistema!");
         }
+    }
+
+    public Usuario update(Integer id, UsuarioDTO objDto) {
+        objDto.setId(id);
+        Usuario oldObj = findById(id);
+        validaPorCpfEEmail(objDto);
+        oldObj = new Usuario(objDto);
+        return repository.save(oldObj);
     }
 }
 
