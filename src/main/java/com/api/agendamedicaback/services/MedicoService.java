@@ -29,7 +29,7 @@ public class MedicoService {
 
     public Medico findById(Integer id) {
         Optional<Medico> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!: " + id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado: " + id));
     }
 
     public List<Medico> findAll() {

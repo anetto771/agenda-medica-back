@@ -1,4 +1,4 @@
-package com.api.agendamedicaback.services.resources;
+package com.api.agendamedicaback.resources;
 
 
 import com.api.agendamedicaback.domain.Usuario;

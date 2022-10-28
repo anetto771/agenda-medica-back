@@ -1,12 +1,13 @@
 package com.api.agendamedicaback.domain;
 
+import com.api.agendamedicaback.domain.dtos.AgendamentoDTO;
 import com.api.agendamedicaback.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
+
 
 @Entity
 public class Agendamento implements Serializable {
@@ -22,7 +23,7 @@ public class Agendamento implements Serializable {
     private LocalDate dataFechamento;
     private Status status;
     private String titulo;
-    private String Observacoes;
+    private String observacoes;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -40,12 +41,14 @@ public class Agendamento implements Serializable {
         super();
     }
 
-    public Agendamento(Integer id, Status status, String titulo, String observacoes, Medico medico, Paciente paciente) {
-        super();
+    public Agendamento(Integer id, LocalDate dataAbertura, LocalDate dataFechamento, Status status, String titulo, String observacoes, Usuario usuario, Medico medico, Paciente paciente) {
         this.id = id;
+        this.dataAbertura = dataAbertura;
+        this.dataFechamento = dataFechamento;
         this.status = status;
         this.titulo = titulo;
-        Observacoes = observacoes;
+        this.observacoes = observacoes;
+        this.usuario = usuario;
         this.medico = medico;
         this.paciente = paciente;
     }
@@ -91,11 +94,19 @@ public class Agendamento implements Serializable {
     }
 
     public String getObservacoes() {
-        return Observacoes;
+        return observacoes;
     }
 
     public void setObservacoes(String observacoes) {
-        Observacoes = observacoes;
+        this.observacoes = observacoes;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Medico getMedico() {
@@ -113,9 +124,8 @@ public class Agendamento implements Serializable {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals (Object obj){
         if (this == obj)
             return true;
         if (obj == null)
@@ -132,10 +142,11 @@ public class Agendamento implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode () {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 }
+

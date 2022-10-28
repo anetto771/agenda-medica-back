@@ -1,4 +1,4 @@
-package com.api.agendamedicaback.services.resources.exceptions;
+package com.api.agendamedicaback.resources.exceptions;
 
 import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
 import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
