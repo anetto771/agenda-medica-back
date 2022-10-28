@@ -1,6 +1,6 @@
 package com.api.agendamedicaback.domain;
 
-import com.api.agendamedicaback.domain.dtos.AgendamentoDTO;
+
 import com.api.agendamedicaback.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
