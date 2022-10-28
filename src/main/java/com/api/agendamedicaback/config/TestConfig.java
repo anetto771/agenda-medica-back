@@ -1,6 +1,6 @@
 package com.api.agendamedicaback.config;
 
-import com.api.agendamedicaback.resources.services.DBService;
+import com.api.agendamedicaback.services.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

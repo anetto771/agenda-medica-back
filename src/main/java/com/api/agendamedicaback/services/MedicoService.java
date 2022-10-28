@@ -1,13 +1,13 @@
-package com.api.agendamedicaback.resources.services;
+package com.api.agendamedicaback.services;
 
 
-import com.api.agendamedicaback.domain.Paciente;
+import com.api.agendamedicaback.domain.Medico;
 import com.api.agendamedicaback.domain.Pessoa;
-import com.api.agendamedicaback.domain.dtos.PacienteDTO;
-import com.api.agendamedicaback.repositories.PacienteRepository;
+import com.api.agendamedicaback.domain.dtos.MedicoDTO;
+import com.api.agendamedicaback.repositories.MedicoRepository;
 import com.api.agendamedicaback.repositories.PessoaRepository;
-import com.api.agendamedicaback.resources.services.exceptions.DataIntegrityViolationException;
-import com.api.agendamedicaback.resources.services.exceptions.ObjectNotFoundException;
+import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
+import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,33 +15,31 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PacienteService {
+public class MedicoService {
 
     @Autowired
-    private PacienteRepository repository;
+    private MedicoRepository repository;
 
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public Paciente findById(Integer id) {
-        Optional<Paciente> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Objeto não encontrado!: " + id)
-        );
+    public Medico findById(Integer id) {
+        Optional<Medico> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado: " + id));
     }
 
-    public List<Paciente> findAll() {
+    public List<Medico> findAll() {
         return repository.findAll();
     }
 
-    public Paciente create(PacienteDTO objDto) {
+    public Medico create(MedicoDTO objDto) {
         objDto.setId(null);
         validaPorCpfEEmail(objDto);
-        Paciente newObj = new Paciente(objDto);
+        Medico newObj = new Medico(objDto);
         return repository.save(newObj);
     }
 
-    private void validaPorCpfEEmail(PacienteDTO objDto) {
+    private void validaPorCpfEEmail(MedicoDTO objDto) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
             throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
@@ -52,16 +50,16 @@ public class PacienteService {
         }
     }
 
-    public Paciente update(Integer id, PacienteDTO objDto) {
+    public Medico update(Integer id, MedicoDTO objDto) {
         objDto.setId(id);
-        Paciente oldObj = findById(id);
+        Medico oldObj = findById(id);
         validaPorCpfEEmail(objDto);
-        oldObj = new Paciente(objDto);
+        oldObj = new Medico(objDto);
         return repository.save(oldObj);
     }
 
     public void delete(Integer id) {
-        Paciente obj = findById(id);
+        Medico obj = findById(id);
         if (obj.getAgendamento().size() > 0){
             throw new DataIntegrityViolationException(
                     "O paciente possui agendamentos e não pode ser excluido."
@@ -70,5 +68,6 @@ public class PacienteService {
         repository.deleteById(id);
     }
 }
+
 
 

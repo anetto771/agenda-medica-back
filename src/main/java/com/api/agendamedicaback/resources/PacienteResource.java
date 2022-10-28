@@ -3,7 +3,7 @@ package com.api.agendamedicaback.resources;
 
 import com.api.agendamedicaback.domain.Paciente;
 import com.api.agendamedicaback.domain.dtos.PacienteDTO;
-import com.api.agendamedicaback.resources.services.PacienteService;
+import com.api.agendamedicaback.services.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
