@@ -1,4 +1,4 @@
-package com.api.agendamedicaback.resources.exceptions;
+package com.api.agendamedicaback.services.resources.exceptions;
 
 import java.io.Serializable;
 
