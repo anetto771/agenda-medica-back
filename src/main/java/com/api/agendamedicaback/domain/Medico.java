@@ -1,11 +1,15 @@
 package com.api.agendamedicaback.domain;
 
+import com.api.agendamedicaback.domain.dtos.MedicoDTO;
+import com.api.agendamedicaback.domain.dtos.UsuarioDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Medico extends Pessoa {
@@ -17,7 +21,6 @@ public class Medico extends Pessoa {
     private List<Agendamento> agendamentos = new ArrayList<>();
 
     public Medico() {
-
         super();
     }
 
@@ -25,8 +28,18 @@ public class Medico extends Pessoa {
         super(id, nome, cpf, email, senha);
     }
 
-    public List<Agendamento> getAgendamentos() {
+    public Medico(MedicoDTO obj) {
+        super();
+        this.id = id = obj.getId();
+        this.nome =  obj.getNome();
+        this.cpf =  obj.getCpf();
+        this.email = obj.getEmail();
+        this.senha = obj.getSenha();
+        this.perfis = obj.getPerfis().stream().map(x-> x.getCodigo()).collect(Collectors.toSet());
+        this.dataCriacao = obj.getDataCriacao();
+    }
 
+    public List<Agendamento> getAgendamento() {
         return agendamentos;
     }
 
