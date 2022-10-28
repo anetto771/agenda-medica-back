@@ -1,12 +1,9 @@
-package com.api.agendamedicaback.services.resources;
+package com.api.agendamedicaback.resources;
 
 
 import com.api.agendamedicaback.domain.Medico;
-import com.api.agendamedicaback.domain.Paciente;
 import com.api.agendamedicaback.domain.dtos.MedicoDTO;
-import com.api.agendamedicaback.domain.dtos.PacienteDTO;
-import com.api.agendamedicaback.services.MedicoService;
-import com.api.agendamedicaback.services.PacienteService;
+import com.api.agendamedicaback.resources.services.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

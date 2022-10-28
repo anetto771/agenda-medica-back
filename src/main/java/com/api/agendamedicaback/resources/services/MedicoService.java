@@ -1,17 +1,13 @@
-package com.api.agendamedicaback.services;
+package com.api.agendamedicaback.resources.services;
 
 
 import com.api.agendamedicaback.domain.Medico;
-import com.api.agendamedicaback.domain.Paciente;
 import com.api.agendamedicaback.domain.Pessoa;
-import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.dtos.MedicoDTO;
-import com.api.agendamedicaback.domain.dtos.UsuarioDTO;
 import com.api.agendamedicaback.repositories.MedicoRepository;
 import com.api.agendamedicaback.repositories.PessoaRepository;
-import com.api.agendamedicaback.repositories.UsuarioRepository;
-import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
-import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
+import com.api.agendamedicaback.resources.services.exceptions.DataIntegrityViolationException;
+import com.api.agendamedicaback.resources.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +25,7 @@ public class MedicoService {
 
     public Medico findById(Integer id) {
         Optional<Medico> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!: " + id));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado: " + id));
     }
 
     public List<Medico> findAll() {

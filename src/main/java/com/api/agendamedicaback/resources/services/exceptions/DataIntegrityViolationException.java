@@ -1,4 +1,4 @@
-package com.api.agendamedicaback.services.exceptions;
+package com.api.agendamedicaback.resources.services.exceptions;
 
 public class DataIntegrityViolationException extends RuntimeException{
     private static final long serialVersionUID = 1L;

@@ -1,7 +1,7 @@
-package com.api.agendamedicaback.services.resources.exceptions;
+package com.api.agendamedicaback.resources.exceptions;
 
-import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
-import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
+import com.api.agendamedicaback.resources.services.exceptions.DataIntegrityViolationException;
+import com.api.agendamedicaback.resources.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

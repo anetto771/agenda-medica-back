@@ -1,4 +1,4 @@
-package com.api.agendamedicaback.services;
+package com.api.agendamedicaback.resources.services;
 
 
 import com.api.agendamedicaback.repositories.AgendamentoRepository;
