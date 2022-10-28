@@ -1,4 +1,4 @@
-package com.api.agendamedicaback.resources.exceptions;
+package com.api.agendamedicaback.services.resources.exceptions;
 
 import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
 import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-
 public class ResourceExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
