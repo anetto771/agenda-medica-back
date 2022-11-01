@@ -9,6 +9,7 @@ import com.api.agendamedicaback.repositories.UsuarioRepository;
 import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
 import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public class UsuarioService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
     public Usuario findById(Integer id) {
         Optional<Usuario> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!: " + id));
@@ -34,6 +38,7 @@ public class UsuarioService {
 
     public Usuario create(UsuarioDTO objDto) {
         objDto.setId(null);
+        objDto.setSenha(encoder.encode(objDto.getSenha()));
         validaPorCpfEEmail(objDto);
         Usuario newObj = new Usuario(objDto);
         return repository.save(newObj);
@@ -52,6 +57,7 @@ public class UsuarioService {
 
     public Usuario update(Integer id, UsuarioDTO objDto) {
         objDto.setId(id);
+        objDto.setSenha(encoder.encode(objDto.getSenha()));
         Usuario oldObj = findById(id);
         validaPorCpfEEmail(objDto);
         oldObj = new Usuario(objDto);

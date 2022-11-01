@@ -1,5 +1,6 @@
 package com.api.agendamedicaback.domain.dtos;
 
+import com.api.agendamedicaback.domain.Agendamento;
 import com.api.agendamedicaback.domain.Medico;
 import com.api.agendamedicaback.domain.Paciente;
 import com.api.agendamedicaback.domain.Usuario;
@@ -32,7 +33,7 @@ public class MedicoDTO implements Serializable {
 
     public MedicoDTO() {
         super();
-        addPerfis(Perfil.PACIENTE);
+        addPerfis(Perfil.MEDICO);
     }
     public MedicoDTO(Medico obj) {
         super();
@@ -56,6 +57,9 @@ public class MedicoDTO implements Serializable {
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
         addPerfis(Perfil.PACIENTE);
+    }
+
+    public MedicoDTO(Agendamento newobj) {
     }
 
 
