@@ -6,6 +6,7 @@ import com.api.agendamedicaback.repositories.MedicoRepository;
 import com.api.agendamedicaback.repositories.PacienteRepository;
 import com.api.agendamedicaback.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,6 +25,9 @@ public class DBService {
 
     @Autowired
     AgendamentoRepository agendamentoRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     //METODO DE INJEÇÃO DE DADOS NO BANCO.
     public void instanciaDB() {

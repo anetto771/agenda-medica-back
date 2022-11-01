@@ -3,7 +3,6 @@ package com.api.agendamedicaback.resources;
 
 import com.api.agendamedicaback.domain.Agendamento;
 import com.api.agendamedicaback.domain.dtos.AgendamentoDTO;
-import com.api.agendamedicaback.domain.dtos.MedicoDTO;
 import com.api.agendamedicaback.services.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +46,9 @@ public class AgendamentoResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AgendamentoDTO> update(@PathVariable Integer id, @Valid @RequestBody AgendamentoDTO objDto) {
-        Agendamento newObj = agendamentoService.update(id, objDto);
-        return ResponseEntity.ok().body(new AgendamentoDTO(newObj));
+    public ResponseEntity<AgendamentoDTO> update(@PathVariable Integer id, @Valid @RequestBody AgendamentoDTO objDto){
+        Agendamento newobj = agendamentoService.update(id, objDto);
+        return ResponseEntity.ok().body(new AgendamentoDTO(newobj));
     }
 
 }

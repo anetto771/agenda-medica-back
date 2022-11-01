@@ -31,7 +31,7 @@ public class UsuarioDTO implements Serializable {
 
     public UsuarioDTO() {
         super();
-        addPerfis(Perfil.PACIENTE);
+        addPerfis(Perfil.USUARIO);
     }
 
     public UsuarioDTO(Usuario obj) {
@@ -43,7 +43,7 @@ public class UsuarioDTO implements Serializable {
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
-        addPerfis(Perfil.PACIENTE);
+        addPerfis(Perfil.USUARIO);
     }
 
 
