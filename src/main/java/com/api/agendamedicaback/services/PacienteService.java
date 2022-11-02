@@ -59,7 +59,6 @@ public class PacienteService {
 
     public Paciente update(Integer id, PacienteDTO objDto) {
         objDto.setId(id);
-        objDto.setSenha(encoder.encode(objDto.getSenha()));
         Paciente oldObj = findById(id);
         validaPorCpfEEmail(objDto);
         oldObj = new Paciente(objDto);

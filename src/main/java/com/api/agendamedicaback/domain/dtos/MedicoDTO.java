@@ -25,6 +25,8 @@ public class MedicoDTO implements Serializable {
     protected String cpf;
     @NotNull(message = "O campo E-MAIL é requerido!")
     protected String email;
+    @NotNull(message = "O campo especialidade é requerido!")
+    protected String especialidade;
     @NotNull(message = "O campo SENHA é requerido!")
     protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
@@ -41,6 +43,7 @@ public class MedicoDTO implements Serializable {
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
+        this.especialidade = obj.getEspecialidade();
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
@@ -53,6 +56,7 @@ public class MedicoDTO implements Serializable {
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();
         this.email = obj.getEmail();
+        this.especialidade = obj.getEspecialidade();
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
@@ -94,6 +98,12 @@ public class MedicoDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEspecialidade() { return especialidade;}
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 
     public String getSenha() {
