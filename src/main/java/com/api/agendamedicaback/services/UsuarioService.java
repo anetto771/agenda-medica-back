@@ -57,7 +57,6 @@ public class UsuarioService {
 
     public Usuario update(Integer id, UsuarioDTO objDto) {
         objDto.setId(id);
-        objDto.setSenha(encoder.encode(objDto.getSenha()));
         Usuario oldObj = findById(id);
         validaPorCpfEEmail(objDto);
         oldObj = new Usuario(objDto);

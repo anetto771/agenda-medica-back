@@ -1,7 +1,8 @@
-package com.api.agendamedicaback.security;
+package com.api.agendamedicaback.services;
 
 import com.api.agendamedicaback.domain.Pessoa;
 import com.api.agendamedicaback.repositories.PessoaRepository;
+import com.api.agendamedicaback.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,8 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-
-public class UserDetailsServiceImplements implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private PessoaRepository repository;
@@ -20,7 +20,7 @@ public class UserDetailsServiceImplements implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Pessoa> user = repository.findByEmail(email);
-        if (user.isPresent()){
+        if(user.isPresent()){
             return new UserSS(
                     user.get().getId(),
                     user.get().getEmail(),
@@ -30,7 +30,4 @@ public class UserDetailsServiceImplements implements UserDetailsService {
         }
         throw new UsernameNotFoundException(email);
     }
-
 }
-
-

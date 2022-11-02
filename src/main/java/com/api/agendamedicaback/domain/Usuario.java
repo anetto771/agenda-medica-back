@@ -1,6 +1,7 @@
 package com.api.agendamedicaback.domain;
 
 import com.api.agendamedicaback.domain.dtos.UsuarioDTO;
+import com.api.agendamedicaback.domain.enums.Perfil;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -19,8 +20,8 @@ public class Usuario extends Pessoa {
         super();
     }
 
-    public Usuario(Integer id, String nome, String cpf, String email, String senha) {
-        super(id, nome, cpf, email, senha);
+    public Usuario(Integer id, String nome, String cpf, String email,String especialidade, String senha) {
+        super(id, nome, cpf, email,especialidade, senha);
     }
     public Usuario(UsuarioDTO obj) {
         super();

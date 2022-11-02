@@ -50,6 +50,14 @@ public class AgendamentoService {
         return repository.save(newAgendamento(objDto));
     }
 
+
+    public Agendamento update(Integer id, AgendamentoDTO objDto) {
+        objDto.setId(id);
+        Agendamento oldObj = findById(id);
+        oldObj = newAgendamento(objDto);
+        return repository.save(oldObj);
+    }
+
     private Agendamento newAgendamento(AgendamentoDTO obj) {
         Medico medico = medicoService.findById(obj.getMedico());
         Paciente paciente = pacienteService.findById(obj.getPaciente());
@@ -69,13 +77,6 @@ public class AgendamentoService {
         agendamento.setObservacoes(obj.getObservacoes());
 
         return agendamento;
-    }
-
-    public Agendamento update(Integer id, AgendamentoDTO objDto) {
-        objDto.setId(id);
-        Agendamento oldObj = findById(id);
-        oldObj = newAgendamento(objDto);
-        return repository.save(oldObj);
     }
 
 }
