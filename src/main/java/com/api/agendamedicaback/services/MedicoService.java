@@ -9,7 +9,6 @@ import com.api.agendamedicaback.repositories.PessoaRepository;
 import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
 import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,12 +19,9 @@ public class MedicoService {
 
     @Autowired
     private MedicoRepository repository;
-
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
 
     public Medico findById(Integer id) {
         Optional<Medico> obj = repository.findById(id);
@@ -38,7 +34,6 @@ public class MedicoService {
 
     public Medico create(MedicoDTO objDto) {
         objDto.setId(null);
-        objDto.setSenha(encoder.encode(objDto.getSenha()));
         validaPorCpfEEmail(objDto);
         Medico newObj = new Medico(objDto);
         return repository.save(newObj);

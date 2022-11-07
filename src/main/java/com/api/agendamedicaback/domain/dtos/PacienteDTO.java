@@ -3,7 +3,10 @@ package com.api.agendamedicaback.domain.dtos;
 import com.api.agendamedicaback.domain.Paciente;
 import com.api.agendamedicaback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,12 +21,23 @@ public class PacienteDTO implements Serializable {
     protected Integer id;
     @NotNull(message = "O campo NOME é requerido!")
     protected String nome;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    protected LocalDate dataNascimento  ;
+
+    @CPF
+    @Column(unique = true)
     @NotNull(message = "O campo CPF é querido!")
     protected String cpf;
+    @NotNull(message = "O campo RG é querido!")
+    protected String rg;
     @NotNull(message = "O campo E-MAIL é requerido!")
     protected String email;
-    @NotNull(message = "O campo SENHA é requerido!")
-    protected String senha;
+    @NotNull(message = "O campo ENDERECO é requerido!")
+    protected String endereco;
+
+    @GeneratedValue
+    protected String telefone;
+
     protected Set<Integer> perfis = new HashSet<>();
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
@@ -35,11 +49,14 @@ public class PacienteDTO implements Serializable {
 
     public PacienteDTO(Paciente obj) {
         super();
-        this.id = id = obj.getId();
+        this.id = obj.getId();
         this.nome = obj.getNome();
+        this.dataNascimento = obj.getDataNascimento();
         this.cpf = obj.getCpf();
+        this.rg = obj.getRg();
         this.email = obj.getEmail();
-        this.senha = obj.getSenha();
+        this.endereco = obj.getEndereco();
+        this.telefone = obj.getTelefone();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
         addPerfis(Perfil.PACIENTE);
@@ -62,6 +79,10 @@ public class PacienteDTO implements Serializable {
         this.nome = nome;
     }
 
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
 
     public String getCpf() {
         return cpf;
@@ -71,6 +92,15 @@ public class PacienteDTO implements Serializable {
         this.cpf = cpf;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+
     public String getEmail() {
         return email;
     }
@@ -78,13 +108,19 @@ public class PacienteDTO implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getSenha() {
-        return senha;
+    public String getEndereco(){
+        return endereco;
+    }
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+
+    public String getTelefone() {
+        return telefone;
+    }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public Set<Perfil> getPerfis() {
@@ -102,5 +138,6 @@ public class PacienteDTO implements Serializable {
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
+
 
 }

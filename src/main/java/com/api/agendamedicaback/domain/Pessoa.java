@@ -19,11 +19,20 @@ public abstract class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     protected String nome;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    protected LocalDate dataNascimento;
     @CPF
     @Column(unique = true)
     protected String cpf;
     @Column(unique = true)
+    protected String rg;
+    @Column(unique = true)
     protected String email;
+    protected String endereco;
+    @GeneratedValue
+
+
+    protected String telefone;
     protected String especialidade;
     protected String senha;
     @ElementCollection(fetch = FetchType.EAGER)
@@ -32,21 +41,31 @@ public abstract class Pessoa implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
+
+
     public Pessoa() {
         super();
         addPerfis(Perfil.PACIENTE);
     }
 
-    public Pessoa(Integer id, String nome, String cpf, String email,String especialidade, String senha) {
+    public Pessoa(Integer id, String nome,String dataNascimento, String cpf,String rg, String email,String endereco,String telefone ,String especialidade, String senha) {
         super();
         this.id = id;
         this.nome = nome;
+        this.dataNascimento = LocalDate.parse(dataNascimento);
         this.cpf = cpf;
+        this.rg = rg;
         this.email = email;
+        this.endereco = endereco;
+        this.telefone = telefone;
         this.especialidade = especialidade;
         this.senha = senha;
         addPerfis(Perfil.USUARIO);
     }
+
+    public Pessoa(Integer id, String nome, String valueOf, String cpf, String email, String endereco, String telefone, String especialidade, String senha) {
+    }
+
 
     public Integer getId() {
         return id;
@@ -64,12 +83,28 @@ public abstract class Pessoa implements Serializable {
         this.nome = nome;
     }
 
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+
+        this.dataNascimento = dataNascimento;
+    }
+
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     public String getEmail() {
@@ -79,11 +114,25 @@ public abstract class Pessoa implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
     public String getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(String email) {
+    public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
 

@@ -19,22 +19,26 @@ public class Paciente extends Pessoa {
     public Paciente() {
         super();
     }
+    public Paciente(Integer id, String nome,String dataNascimento, String cpf,String rg, String email,String endereco,String telefone,String especialidade, String senha) {
+        super(id, nome,dataNascimento, cpf, rg, email,endereco,telefone,especialidade, senha);
+    }
     public Paciente(PacienteDTO obj) {
         super();
         this.id = id = obj.getId();
         this.nome = obj.getNome();
+        this.dataNascimento = obj.getDataNascimento();
         this.cpf = obj.getCpf();
+        this.rg = obj.getRg();
         this.email = obj.getEmail();
-        this.senha = obj.getSenha();
+        this.endereco = obj.getEndereco();
+        this.telefone = obj.getTelefone();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
         addPerfis(Perfil.PACIENTE);
     }
 
 
-    public Paciente(Integer id, String nome, String cpf, String email,String especialidade, String senha) {
-        super(id, nome, cpf, email,especialidade, senha);
-    }
+
 
 
     public List<Agendamento> getAgendamento() {
