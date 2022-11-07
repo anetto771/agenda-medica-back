@@ -3,8 +3,10 @@ package com.api.agendamedicaback.domain.dtos;
 import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,13 +17,12 @@ import java.util.stream.Collectors;
 public class UsuarioDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
     protected Integer id;
     @NotNull(message = "O campo NOME é requerido!")
     protected String nome;
-    @NotNull(message = "O campo CPF é querido!")
+    @CPF
+    @Column(unique = true)
     protected String cpf;
-    @NotNull(message = "O campo E-MAIL é requerido!")
     protected String email;
     @NotNull(message = "O campo SENHA é requerido!")
     protected String senha;
@@ -48,43 +49,33 @@ public class UsuarioDTO implements Serializable {
 
 
     public Integer getId() {
-
         return id;
     }
-
     public void setId(Integer id) {
-
         this.id = id;
     }
-
     public String getNome() {
-
         return nome;
     }
 
     public void setNome(String nome) {
-
         this.nome = nome;
     }
 
 
     public String getCpf() {
-
         return cpf;
     }
 
     public void setCpf(String cpf) {
-
         this.cpf = cpf;
     }
 
     public String getEmail() {
-
         return email;
     }
 
     public void setEmail(String email) {
-
         this.email = email;
     }
 

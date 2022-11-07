@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,30 +23,24 @@ public class Medico extends Pessoa {
     public Medico() {
         super();
     }
-
-    public Medico(Integer id, String nome, String cpf, String email, String senha, String especialidade) {
-        super(id, nome, cpf, email,especialidade, senha);
-
+    public Medico(Integer id, String nome, LocalDate dataNascimento, String cpf, String email,String endereco, String telefone, String especialidade,String senha) {
+        super(id, nome, String.valueOf(dataNascimento), cpf, email,endereco,telefone,especialidade,senha);
     }
-
     public Medico(MedicoDTO obj) {
         super();
         this.id = id = obj.getId();
         this.nome =  obj.getNome();
         this.cpf =  obj.getCpf();
         this.email = obj.getEmail();
+        this.telefone = obj.getTelefone();
         this.especialidade = obj.getEspecialidade();
-        this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x-> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
     }
-
     public List<Agendamento> getAgendamento() {
         return agendamentos;
     }
-
     public void setAgendamentos(List<Agendamento> agendamentos) {
         this.agendamentos = agendamentos;
     }
-
 }

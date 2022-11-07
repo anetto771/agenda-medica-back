@@ -1,12 +1,13 @@
 package com.api.agendamedicaback.domain.dtos;
 
-import com.api.agendamedicaback.domain.Agendamento;
+
 import com.api.agendamedicaback.domain.Medico;
-import com.api.agendamedicaback.domain.Paciente;
-import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,14 +22,18 @@ public class MedicoDTO implements Serializable {
     protected Integer id;
     @NotNull(message = "O campo NOME é requerido!")
     protected String nome;
-    @NotNull(message = "O campo CPF é querido!")
+    @NotNull(message = "O campo CPF é requerido!")
+    @CPF
+    @Column(unique = true)
     protected String cpf;
     @NotNull(message = "O campo E-MAIL é requerido!")
     protected String email;
+
+    @GeneratedValue
+
+    protected String telefone;
     @NotNull(message = "O campo especialidade é requerido!")
     protected String especialidade;
-    @NotNull(message = "O campo SENHA é requerido!")
-    protected String senha;
     protected Set<Integer> perfis = new HashSet<>();
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
@@ -39,33 +44,16 @@ public class MedicoDTO implements Serializable {
     }
     public MedicoDTO(Medico obj) {
         super();
-        this.id = id = obj.getId();
+        this.id= obj.getId();
         this.nome = obj.getNome();
-        this.cpf = obj.getCpf();
         this.email = obj.getEmail();
+        this.cpf = obj.getCpf();
+        this.telefone = obj.getTelefone();
         this.especialidade = obj.getEspecialidade();
-        this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
         addPerfis(Perfil.PACIENTE);
     }
-
-    public MedicoDTO(Paciente obj) {
-        super();
-        this.id = id = obj.getId();
-        this.nome = obj.getNome();
-        this.cpf = obj.getCpf();
-        this.email = obj.getEmail();
-        this.especialidade = obj.getEspecialidade();
-        this.senha = obj.getSenha();
-        this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
-        this.dataCriacao = obj.getDataCriacao();
-        addPerfis(Perfil.PACIENTE);
-    }
-
-    public MedicoDTO(Agendamento newobj) {
-    }
-
 
     public Integer getId() {
         return id;
@@ -78,7 +66,6 @@ public class MedicoDTO implements Serializable {
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -100,19 +87,20 @@ public class MedicoDTO implements Serializable {
         this.email = email;
     }
 
-    public String getEspecialidade() { return especialidade;}
+    public String getTelefone() {
+        return telefone;
+    }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEspecialidade()
+    { return especialidade;}
 
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
     public Set<Perfil> getPerfis() {
         return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());

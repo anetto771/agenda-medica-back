@@ -24,8 +24,7 @@ public class PacienteService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+
 
     public Paciente findById(Integer id) {
         Optional<Paciente> obj = repository.findById(id);
@@ -40,7 +39,6 @@ public class PacienteService {
 
     public Paciente create(PacienteDTO objDto) {
         objDto.setId(null);
-        objDto.setSenha(encoder.encode(objDto.getSenha()));
         validaPorCpfEEmail(objDto);
         Paciente newObj = new Paciente(objDto);
         return repository.save(newObj);

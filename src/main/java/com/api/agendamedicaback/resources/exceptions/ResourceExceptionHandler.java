@@ -41,6 +41,7 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError>
     validationErrors(MethodArgumentNotValidException ex, HttpServletRequest request){
