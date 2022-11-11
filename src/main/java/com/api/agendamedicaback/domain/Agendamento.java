@@ -3,12 +3,8 @@ package com.api.agendamedicaback.domain;
 
 import com.api.agendamedicaback.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-
-
 
 @Entity
 public class Agendamento implements Serializable {
@@ -18,18 +14,18 @@ public class Agendamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataAbertura = LocalDate.now();
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataFechamento;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private String horaAbertura;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private String horaFechamento;
     private Status status;
     private String titulo;
     private String observacoes;
 
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-
     @ManyToOne
     @JoinColumn(name = "medico_id")
     private Medico medico;
@@ -37,15 +33,14 @@ public class Agendamento implements Serializable {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-
     public Agendamento() {
         super();
     }
-
-    public Agendamento(Integer id, LocalDate dataAbertura, LocalDate dataFechamento, Status status, String titulo, String observacoes, Usuario usuario, Medico medico, Paciente paciente) {
+    public Agendamento(Integer id,String horaAbertura,String horaFechamento, Status status, String titulo, String observacoes, Usuario usuario, Medico medico, Paciente paciente) {
+        super();
         this.id = id;
-        this.dataAbertura = dataAbertura;
-        this.dataFechamento = dataFechamento;
+        this.horaAbertura = horaAbertura;
+        this.horaFechamento = horaFechamento;
         this.status = status;
         this.titulo = titulo;
         this.observacoes = observacoes;
@@ -62,20 +57,20 @@ public class Agendamento implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDataAbertura() {
-        return dataAbertura;
+    public String getHoraAbertura() {
+        return horaAbertura;
     }
 
-    public void setDataAbertura(LocalDate dataAbertura) {
-        this.dataAbertura = dataAbertura;
+    public void setHoraAbertura(String horaAbertura) {
+        this.horaAbertura = horaAbertura;
     }
 
-    public LocalDate getDataFechamento() {
-        return dataFechamento;
+    public String getHoraFechamento() {
+        return horaFechamento;
     }
 
-    public void setDataFechamento(LocalDate dataFechamento) {
-        this.dataFechamento = dataFechamento;
+    public void setHoraFechamento(String horaFechamento) {
+        this.horaFechamento = horaFechamento;
     }
 
     public Status getStatus() {

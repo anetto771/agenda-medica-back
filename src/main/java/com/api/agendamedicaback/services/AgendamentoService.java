@@ -4,18 +4,15 @@ package com.api.agendamedicaback.services;
 import com.api.agendamedicaback.domain.Agendamento;
 import com.api.agendamedicaback.domain.Medico;
 import com.api.agendamedicaback.domain.Paciente;
+import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.dtos.AgendamentoDTO;
-import com.api.agendamedicaback.domain.dtos.MedicoDTO;
 import com.api.agendamedicaback.domain.enums.Status;
 import com.api.agendamedicaback.repositories.AgendamentoRepository;
-
-import com.api.agendamedicaback.services.exceptions.DataIntegrityViolationException;
 import com.api.agendamedicaback.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +56,7 @@ public class AgendamentoService {
     }
 
     private Agendamento newAgendamento(AgendamentoDTO obj) {
+
         Medico medico = medicoService.findById(obj.getMedico());
         Paciente paciente = pacienteService.findById(obj.getPaciente());
 
@@ -66,15 +64,16 @@ public class AgendamentoService {
         if (obj.getId() != null) {
             agendamento.setId(obj.getId());
         }
-        if (obj.getStatus().equals(2)){
-            agendamento.setDataFechamento(LocalDate.now());
-        }
+
 
         agendamento.setMedico(medico);
         agendamento.setPaciente(paciente);
+
         agendamento.setStatus(Status.toEnum(obj.getStatus()));
         agendamento.setTitulo(obj.getTitulo());
         agendamento.setObservacoes(obj.getObservacoes());
+        agendamento.setHoraAbertura(obj.getHoraAbertura());
+        agendamento.setHoraFechamento(obj.getHoraFechamento());
 
         return agendamento;
     }
