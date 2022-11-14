@@ -4,7 +4,6 @@ package com.api.agendamedicaback.services;
 import com.api.agendamedicaback.domain.Agendamento;
 import com.api.agendamedicaback.domain.Medico;
 import com.api.agendamedicaback.domain.Paciente;
-import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.dtos.AgendamentoDTO;
 import com.api.agendamedicaback.domain.enums.Status;
 import com.api.agendamedicaback.repositories.AgendamentoRepository;
@@ -55,8 +54,12 @@ public class AgendamentoService {
         return repository.save(oldObj);
     }
 
-    private Agendamento newAgendamento(AgendamentoDTO obj) {
+    public List<Agendamento> registroAgendamento() {
+        Optional<List<Agendamento>> obj = repository.registroAgendamento();
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Não existe agendamento."));
+    }
 
+    private Agendamento newAgendamento(AgendamentoDTO obj) {
         Medico medico = medicoService.findById(obj.getMedico());
         Paciente paciente = pacienteService.findById(obj.getPaciente());
 
@@ -68,7 +71,6 @@ public class AgendamentoService {
 
         agendamento.setMedico(medico);
         agendamento.setPaciente(paciente);
-
         agendamento.setStatus(Status.toEnum(obj.getStatus()));
         agendamento.setTitulo(obj.getTitulo());
         agendamento.setObservacoes(obj.getObservacoes());

@@ -1,7 +1,7 @@
 package com.api.agendamedicaback.domain.dtos;
 
 import com.api.agendamedicaback.domain.Agendamento;
-import com.api.agendamedicaback.domain.Usuario;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
