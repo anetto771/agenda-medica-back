@@ -5,7 +5,6 @@ import com.api.agendamedicaback.domain.Medico;
 import com.api.agendamedicaback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
@@ -30,7 +29,6 @@ public class MedicoDTO implements Serializable {
     protected String email;
 
     @GeneratedValue
-
     protected String telefone;
     @NotNull(message = "O campo especialidade é requerido!")
     protected String especialidade;

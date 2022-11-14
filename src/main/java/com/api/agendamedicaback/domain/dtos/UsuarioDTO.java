@@ -4,8 +4,6 @@ import com.api.agendamedicaback.domain.Usuario;
 import com.api.agendamedicaback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.br.CPF;
-
-
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -95,18 +93,14 @@ public class UsuarioDTO implements Serializable {
     }
 
     public void addPerfis(Perfil perfis) {
-
         this.perfis.add(perfis.getCodigo());
     }
 
     public LocalDate getDataCriacao() {
-
         return dataCriacao;
     }
 
     public void setDataCriacao(LocalDate dataCriacao) {
-
         this.dataCriacao = dataCriacao;
     }
-
 }

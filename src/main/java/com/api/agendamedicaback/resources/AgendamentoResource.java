@@ -30,12 +30,19 @@ public class AgendamentoResource {
         return ResponseEntity.ok().body(new AgendamentoDTO(obj));
     }
 
+    @GetMapping(value = "/registros")
+    public ResponseEntity<List<AgendamentoDTO>> registroAgendamento() {
+        List<Agendamento> list = agendamentoService.findAll();
+        List<AgendamentoDTO> lisDto = list.stream().map(obj -> new AgendamentoDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(lisDto);
+    }
     @GetMapping
     public ResponseEntity<List<AgendamentoDTO>> findAll() {
         List<Agendamento> list = agendamentoService.findAll();
         List<AgendamentoDTO> lisDto = list.stream().map(obj -> new AgendamentoDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(lisDto);
     }
+
 
     @PostMapping
     public ResponseEntity<AgendamentoDTO> create(@Valid @RequestBody AgendamentoDTO objDto) {

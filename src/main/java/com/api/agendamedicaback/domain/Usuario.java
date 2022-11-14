@@ -1,8 +1,7 @@
 package com.api.agendamedicaback.domain;
 
 import com.api.agendamedicaback.domain.dtos.UsuarioDTO;
-import com.api.agendamedicaback.domain.enums.Perfil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
